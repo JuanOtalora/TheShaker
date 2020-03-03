@@ -28,7 +28,6 @@ router.get("/searchCocktailIngredient", function(req, res) {
   const ingredient = req.query.ingredient;
   mu.cocktails.findManyByIngredient(ingredient).then(cocktails => {
     var hasIngredient = false;
-    console.log(ingredient);
     for (var i = 0; i < cocktails.length; i++) {
       for (var k = 0; k < cocktails[i].ingredients.length; k++) {
           if(cocktails[i].ingredients[k].name === ingredient){
@@ -72,7 +71,6 @@ router.get('/register', (req, res) => {
 })
 
 router.post("/register/create", (req, res) => {
-  console.log("params", req.body);
   const user = {
     name: req.body.name,
     email: req.body.email,
@@ -88,10 +86,8 @@ router.get("/login", (req, res)=>{
 })
 
 router.post("/login/check", (req, res) => {
-  console.log("params de login", req.body);
   var userUsed = {};
   mu.users.findUsers().then( users => {
-    console.log(users);
     var tienePass = false;
     for (var i = 0; i < users.length; i++) {
       if(users[i].email === req.body.email && users[i].password === req.body.password){
